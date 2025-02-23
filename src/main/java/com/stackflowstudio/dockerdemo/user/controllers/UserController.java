@@ -2,6 +2,8 @@ package com.stackflowstudio.dockerdemo.user.controllers;
 
 import com.stackflowstudio.dockerdemo.user.models.User;
 import com.stackflowstudio.dockerdemo.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +14,21 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    Logger logger
+            = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        // Logging various log level messages
+        System.out.println("Hellow world");
+        logger.trace("Log level: TRACE");
+        logger.info("Log level: INFO");
+        logger.debug("Log level: DEBUG");
+        logger.error("Log level: ERROR");
+        logger.warn("Log level: WARN");
         return ResponseEntity.ok(userService.createUser(user));
     }
 
